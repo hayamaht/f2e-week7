@@ -1,32 +1,20 @@
 /* eslint no-unused-vars:0 */
 
 import * as Phaser from 'phaser'
+import { Preloader } from './scenes/preloader'
+import { Title } from './scenes/title'
+import { Game } from './scenes/game'
+import { GameWidth, GameHeight } from './consts'
 
 var config = {
   type: Phaser.AUTO,
-  width: 800,
-  height: 600,
-  scene: {
-    preload: preload,
-    create: create
-  }
+  width: GameWidth,
+  height: GameHeight,
+  scene: [
+    Preloader,
+    Title,
+    Game
+  ]
 }
 
 var game = new Phaser.Game(config)
-
-function preload () {
-  this.load.image('logo', 'assets/logo.png')
-}
-
-function create () {
-  var logo = this.add.image(400, 150, 'logo')
-
-  this.tweens.add({
-    targets: logo,
-    y: 450,
-    duration: 2000,
-    ease: 'Power2',
-    yoyo: true,
-    loop: -1
-  })
-}
